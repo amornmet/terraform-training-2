@@ -8,7 +8,7 @@ resource "aws_iam_user_policy" "s3_readonly" {
   user = aws_iam_user.this.name
 
   policy = jsonencode({
-    version = "2012-10-17"
+    Version = "2012-10-17"
 
     Statement = [
         {

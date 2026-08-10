@@ -9,5 +9,4 @@ terraform {
 
 provider "aws" {
   region = var.aws_region #มาจาก variables.tf
-  profile = "company-dev"
 }
