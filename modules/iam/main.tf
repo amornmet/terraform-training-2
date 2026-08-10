@@ -9,5 +9,21 @@ resource "aws_iam_user_policy" "s3_readonly" {
 
   policy = jsonencode({
     version = "2012-10-17"
-  })
+
+    Statement = [
+        {
+            Effect = "Allow"
+
+            Action = [
+                "s3:GetObject",
+                "s3:ListBucket"
+            ]
+
+            Resource = [
+                var.bucket_arn,
+                "${var.bucket_arn}/*"
+            ]
+        }
+    ]
+    })
 }
