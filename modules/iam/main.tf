@@ -20,8 +20,8 @@ resource "aws_iam_user_policy" "s3_readonly" {
             ]
 
             Resource = [
-                var.bucket_arn,
-                "${var.bucket_arn}/*"
+                var.bucket_arn, #มาจาก main.tf
+                "${var.bucket_arn}/*" #มาจาก main.tf
             ]
         }
     ]
