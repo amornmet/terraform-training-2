@@ -38,3 +38,7 @@ terraform-training-2
         |-main.tf
         |-variables.tf
         |-outputs.tf
+
+
+# Process S3 Module
+terraform.tfvars (bucket_name) -> variables.tf (var.bucket_name) -> s3 (bucket_name) -> s3/variables.tf (var.bucket_name) -> s3/main.tf (aws_s3_bucket)
