@@ -1,7 +1,7 @@
 # terraform-training-2
 module s3 iam on aws
 
-Lab Terraform + AWS
+# Lab Terraform + AWS
 - IAM
 - S3
 - Module
@@ -17,3 +17,24 @@ command aws auth
 
 # re-login
 - $ aws sts login --profile company-dev
+
+# Architect Directory
+terraform-training-2
+|
+|-providers.tf
+|-main.tf
+|-variables.tf
+|-terraform.tfvars
+|-outputs.tf
+|
+|-modules/
+    |
+    |-iam/
+    |   |-main.tf
+    |   |-variables.tf
+    |   |-outputs.tf
+    |
+    |-s3/
+        |-main.tf
+        |-variables.tf
+        |-outputs.tf
