@@ -16,7 +16,7 @@ command aws auth
 - $ aws sts get-caller-identity --profile company-dev
 
 # re-login
-- $ aws sts login --profile company-dev
+- $ aws sso login --profile company-dev
 
 # Architect Directory
 terraform-training-2

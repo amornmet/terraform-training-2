@@ -8,9 +8,3 @@ variable "user" {
 variable "bucket_arn" {
   description = "s3 bucket arn"
 }
-
-variable "password" {
-  description = "password"
-  type = string
-  sensitive = true
-}

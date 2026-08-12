@@ -3,7 +3,6 @@ module "iam" {
 
   #iam/variables.tf = variables.tf
   user = var.iam_user
-  password = var.password
   bucket_arn = module.s3.bucket_arn #มาจาก s3/outputs.tf
 
 }

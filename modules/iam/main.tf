@@ -4,10 +4,7 @@ resource "aws_iam_user" "this" {
 
 resource "aws_iam_user_login_profile" "this" {
   user = aws_iam_user.this.name
-
-  password = var.password
-
-  password_reset_required = true
+  password_reset_required = false
 }
 
 resource "aws_iam_user_policy" "s3_terraform" {
@@ -26,7 +23,7 @@ resource "aws_iam_user_policy" "s3_terraform" {
                 "s3:GetObject",
                 "s3:ListBucket",
                 "s3:PutObject",
-                "s3:DelteObject"
+                "s3:DeleteObject"
             ]
 
             Resource = [
@@ -42,8 +39,7 @@ resource "aws_iam_user_policy" "s3_terraform" {
             ]
 
             Resource = [
-                var.bucket_arn,
-                "${var.bucket_arn}"
+                "*"
             ]
         }
     ]
