@@ -1,5 +1,5 @@
 aws_region = "ap-southeast-2"
 
-iam_username = "pliwmon-dev"
+iam_username = "pliw-dev"
 
-bucket_name = "s3-pliwmon-dev"
+bucket_name = "s3-pliw-dev"
