@@ -1,10 +1,16 @@
 #มาจาก terraform.tfvars & variables.tf & main.tf
-variable "username" {
+variable "user" {
   description = "iam user"
   type = string
 }
 
-#มาจาก s3/outputs.tf
+#มาจาก main.tf
 variable "bucket_arn" {
-  description = "value"
+  description = "s3 bucket arn"
+}
+
+variable "password" {
+  description = "password"
+  type = string
+  sensitive = true
 }

@@ -5,7 +5,7 @@ variable "aws_region" {
 }
 
 #มาจาก terraform.tfvars
-variable "iam_username" {
+variable "iam_user" {
   description = "iam user"
   type = string
 }
@@ -13,5 +13,10 @@ variable "iam_username" {
 #มาจาก terraform.tfvars
 variable "bucket_name" {
   description = "s3 bucket"
+  type = string
+}
+
+variable "password" {
+  description = "password user"
   type = string
 }

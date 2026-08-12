@@ -2,8 +2,10 @@ module "iam" {
   source = "./modules/iam"
 
   #iam/variables.tf = variables.tf
-  username = var.iam_username
+  user = var.iam_user
+  password = var.password
   bucket_arn = module.s3.bucket_arn #มาจาก s3/outputs.tf
+
 }
 
 module "s3" {

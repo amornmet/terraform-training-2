@@ -1,9 +1,17 @@
 resource "aws_iam_user" "this" {
-  name = var.username #มาจาก iam/variables.tf
+  name = var.user #มาจาก iam/variables.tf
 }
 
-resource "aws_iam_user_policy" "s3_readonly" {
-  name = "s3-readonly"
+resource "aws_iam_user_login_profile" "this" {
+  user = aws_iam_user.this.name
+
+  password = var.password
+
+  password_reset_required = true
+}
+
+resource "aws_iam_user_policy" "s3_terraform" {
+  name = "s3-terraform"
 
   user = aws_iam_user.this.name
 
@@ -16,12 +24,26 @@ resource "aws_iam_user_policy" "s3_readonly" {
 
             Action = [
                 "s3:GetObject",
-                "s3:ListBucket"
+                "s3:ListBucket",
+                "s3:PutObject",
+                "s3:DelteObject"
             ]
 
             Resource = [
                 var.bucket_arn, #มาจาก main.tf
-                "${var.bucket_arn}/*" #มาจาก main.tf
+                "${var.bucket_arn}/*" #มาจาก iam/variables.tf
+            ]
+        },
+        {
+            Effect = "Allow"
+
+            Action = [
+                "s3:ListAllMyBuckets"
+            ]
+
+            Resource = [
+                var.bucket_arn,
+                "${var.bucket_arn}"
             ]
         }
     ]
