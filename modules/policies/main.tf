@@ -47,7 +47,7 @@ resource "aws_s3_bucket_policy" "bucket_1" {
             Effect = "Allow"
 
             Principal = {
-                AWS = value(var.user_arns)
+                AWS = values(var.user_arns)
             }
 
             Action = [
