@@ -1,54 +1,22 @@
 module "iam" {
-  for_each = var.iam_users
-
   source = "./modules/iam"
 
-  user = each.key
-
+  users = var.iam_users #ส่งไปที่ iam/variables.tf
 }
 
 module "s3" {
-  for_each = var.s3_buckets #มาจาก variables.tf
-
   source = "./modules/s3"
 
-  #s3/variables.tf = variables.tf
-  bucket_name    = each.value.bucket_name
+  buckets = var.buckets #ส่งไปที่ s3/variables.tf
 }
 
-resource "aws_iam_user_policy" "s3_policy" {
-  for_each = var.iam_users
+module "policies" {
+  source = "./modules/policies"
 
-  name = "${each.value.username}-s3-policy"
+  iam_policy_name = var.iam_policy_name #ส่งไปที่ policies/variables.tf
 
-  user = module.iam[each.key].user_name
+  bucket_1_arn = module.s3.bucket_arns[var.buckets[0]] #ส่งไปที่ policies/variables.tf
+  bucket_1_id = module.s3.bucket_ids[var.buckets[0]] #ส่งไปที่ policies/variables.tf
 
-  policy = jsonencode({
-    Version = "2012-10-17"
-
-    Statement = [
-      {
-        Sid = "ListBucket"
-        Effect = "Allow"
-
-        Action = [
-          "s3:ListBucket"
-        ]
-
-        Resource = [
-          module.s3[each.value.bucket_key].bucket_arn
-        ]
-      },
-      {
-        Sid = "ObjectAccess"
-        Effect = "Allow"
-
-        Action = each.value.policy_actions
-
-        Resource = [
-          "${module.s3[each.value.bucket_key].bucket_arn}/*"
-        ]
-      }
-    ]
-  })
+  user_arns = module.iam.user_arns #ส่งไปที่ policies/variables.tf
 }

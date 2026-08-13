@@ -1,7 +1,7 @@
-output "user_name" {
-  value = aws_iam_user.this.name #มาจาก iam/main.tf
-}
-
-output "user_arn" {
-  value = aws_iam_user.this.arn #มาจาก iam/main.tf
+output "user_arns" {
+  description = "iam user arns"
+  value = {
+    for name, user in aws_iam_user.users : #มาจาก iam/main.tf
+    name => user.arn
+  }
 }

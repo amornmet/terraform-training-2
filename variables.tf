@@ -1,26 +1,23 @@
-#มาจาก terraform.tfvars
+#aws_region
 variable "aws_region" {
   description = "aws region"
-  type        = string
+  type = string
 }
 
-#มาจาก terraform.tfvars
+#iam_users
 variable "iam_users" {
   description = "iam users"
-
-  type = map(object({
-    user = string
-    bucket_key     = string
-    policy_actions = list(string)
-  }))
+  type = list(string)
 }
 
-#มาจาก terraform.tfvars
-variable "s3_buckets" {
-  description = "s3 bucket"
+#buckets
+variable "buckets" {
+  description = "s3 buckets"
+  type = list(string)
+}
 
-  type = map(object({
-    bucket_name    = string
-    policy_actions = list(string)
-  }))
+#iam_policy_name
+variable "iam_policy_name" {
+  description = "iam policy name"
+  type = string
 }

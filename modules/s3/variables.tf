@@ -1,5 +1,4 @@
-#มาจาก terraform.tfvars & variables.tf & main.tf
-variable "bucket_name" {
-  description = "name s3 bucket"
-  type = string
+variable "buckets" {
+  description = "s3 bucket names"
+  type = list(string)
 }
