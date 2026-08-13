@@ -21,3 +21,15 @@ variable "user_arns" {
   description = "iam user arns"
   type = map(string)
 }
+
+#ส่งไปที่ policies/main.tf
+variable "s3_object_actions" {
+  description = "s3 action allowed by iam policy"
+  type = list(string)
+}
+
+#ส่งไปที่ policies/main.tf
+variable "s3_bucket_actions" {
+  description = "s3 action"
+  type = list(string)
+}

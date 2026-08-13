@@ -21,3 +21,13 @@ variable "iam_policy_name" {
   description = "iam policy name"
   type = string
 }
+
+variable "s3_object_actions" {
+  description = "s3 action allowed by iam policy"
+  type = list(string)
+}
+
+variable "s3_bucket_actions" {
+  description = "s3 action"
+  type = list(string)
+}

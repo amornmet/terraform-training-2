@@ -15,3 +15,15 @@ buckets = [
 
 #ส่งไปที่ variables.tf
 iam_policy_name = "terraform-s3-policy"
+
+#ส่งไปที่ variables.tf
+s3_object_actions = [
+  "s3:GetObject",
+  "s3:PutObject",
+  "s3:DeleteObject"
+]
+
+s3_bucket_actions = [
+  "s3:ListAllMyBuckets",
+  "s3:GetBucketLocation"
+]

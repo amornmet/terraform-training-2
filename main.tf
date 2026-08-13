@@ -19,4 +19,7 @@ module "policies" {
   bucket_1_id = module.s3.bucket_ids[var.buckets[0]] #ส่งไปที่ policies/variables.tf
 
   user_arns = module.iam.user_arns #ส่งไปที่ policies/variables.tf
+
+  s3_object_actions = var.s3_object_actions
+  s3_bucket_actions = var.s3_bucket_actions
 }
