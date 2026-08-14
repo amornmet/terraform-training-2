@@ -16,7 +16,7 @@ command aws auth
 - $ aws sts get-caller-identity --profile company-dev
 
 # re-login
-- $ aws sts login --profile company-dev
+- $ aws sso login --profile company-dev
 
 # Architect Directory
 terraform-training-2
@@ -42,3 +42,7 @@ terraform-training-2
 
 # Process S3 Module
 terraform.tfvars (bucket_name) -> variables.tf (var.bucket_name) -> s3 (bucket_name) -> s3/variables.tf (var.bucket_name) -> s3/main.tf (aws_s3_bucket)
+
+# modules
+คือ template
+

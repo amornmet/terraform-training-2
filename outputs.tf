@@ -1,15 +1,17 @@
-output "iam_user_name" {
-  value = module.iam.user_name #มาจาก iam/outputs.tf
+#มาจาก iam/outputs.tf
+output "iam_users" {
+  description = "created iam users"
+  value       = module.iam.user_arns
 }
 
-output "iam_user_arn" {
-  value = module.iam.user_arn #มาจาก iam/outputs.tf
+#มาจาก s3/outputs.tf
+output "aws_s3_bucket" {
+  description = "created s3 buckets"
+  value       = module.s3.bucket_arns
 }
 
-output "s3_bucket_id" {
-  value = module.s3.bucket_id #มาจาก s3/outputs.tf
-}
-
-output "s3_bucket_arn" {
-  value = module.s3.bucket_arn #มาจาก s3/outputs.tf
+#มาจาก policies/outputs.tf
+output "iam_policy_arn" {
+  description = "created iam policy arn"
+  value       = module.policies.iam_policy_arn
 }
