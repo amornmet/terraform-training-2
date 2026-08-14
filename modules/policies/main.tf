@@ -1,5 +1,12 @@
+#IAM Policy
 resource "aws_iam_policy" "s3_policy" {
-  name = var.iam_policy_name
+  for_each = {
+    for user, config in var.user_bucket_mapping :
+    user => config
+    if config.policy == "iam"
+  }
+
+  name = "${var.iam_policy_name}-${each.key}"
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -9,21 +16,28 @@ resource "aws_iam_policy" "s3_policy" {
         Effect = statements.effect
         Action = statements.actions
 
-        Resource = var.bucket_1_arn
+        Resource = var.bucket_arns[each.value.bucket]
       }
     ]
   })
 }
 
 resource "aws_iam_user_policy_attachment" "users" {
-  for_each = var.user_arns
+  for_each = var.user_bucket_mapping
 
-  user = split("/", each.value)[1]
-  policy_arn = aws_iam_policy.s3_policy.arn
+  user = each.key
+
+  policy_arn = aws_iam_policy.s3_policy[each.key].arn
 }
 
-resource "aws_s3_bucket_policy" "bucket_1" {
-  bucket = var.bucket_1_id
+resource "aws_s3_bucket_policy" "buckets" {
+  for_each = {
+    for user, config in var.user_bucket_mapping :
+    user => config
+    if config.policy == "bucket"
+  }
+
+  bucket = var.bucket_ids[each.value.bucket]
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -33,12 +47,12 @@ resource "aws_s3_bucket_policy" "bucket_1" {
         Sid = item.sid
         Effect = item.effect
         Principal = {
-          AWS = values(var.user_arns) #มาจาก policies/variables.tf
+          AWS = var.user_arns[each.key] #มาจาก policies/variables.tf
         }
 
         Action = item.actions
 
-        Resource = "${var.bucket_1_arn}/*"
+        Resource = "${var.bucket_arns[each.value.bucket]}/*"
       }
     ]
   })

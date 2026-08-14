@@ -5,21 +5,27 @@ variable "iam_policy_name" {
 }
 
 #ส่งไปที่ policies/main.tf
-variable "bucket_1_arn" {
-  description = "s3 bucket 1 arn"
-  type = string
-}
-
-#ส่งไปที่ policies/main.tf
-variable "bucket_1_id" {
-  description = "s3 bucket 1 id"
-  type = string
-}
-
-#ส่งไปที่ policies/main.tf
 variable "user_arns" {
   description = "iam user arns"
   type = map(string)
+}
+
+variable "bucket_arns" {
+  description = "s3 bucket arn map"
+  type = map(string)
+}
+
+
+variable "bucket_ids" {
+  description = "s3 bucket id map"
+  type = map(string)
+}
+variable "user_bucket_mapping" {
+  description = "mapping iam user to s3"
+  type = map(object({
+    bucket = string
+    policy = string
+  }))
 }
 
 #ส่งไปที่ policies/main.tf
