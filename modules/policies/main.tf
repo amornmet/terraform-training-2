@@ -23,10 +23,13 @@ resource "aws_iam_policy" "s3_policy" {
 }
 
 resource "aws_iam_user_policy_attachment" "users" {
-  for_each = var.user_bucket_mapping
+  for_each = {
+    for user, config in var.user_bucket_mapping :
+    user => config
+    if config.policy == "iam"
+  }
 
   user = each.key
-
   policy_arn = aws_iam_policy.s3_policy[each.key].arn
 }
 
