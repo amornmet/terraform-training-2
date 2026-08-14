@@ -5,20 +5,12 @@ resource "aws_iam_policy" "s3_policy" {
     Version = "2012-10-17"
 
     Statement = [
-        {
-            Effect = "Allow"
+      for statements in var.s3_bucket_actions : {
+        Effect = statements.effect
+        Action = statements.actions
 
-            Action = var.s3_bucket_actions
-
-            Resource = var.bucket_1_arn
-        },
-        {
-            Effect = "Allow"
-
-            Action = var.s3_object_actions
-
-            Resource = "${var.bucket_1_arn}/*"
-        }
+        Resource = var.bucket_1_arn
+      }
     ]
   })
 }
@@ -37,18 +29,17 @@ resource "aws_s3_bucket_policy" "bucket_1" {
     Version = "2012-10-17"
 
     Statement = [
-        {
-            Sid = "AllowIAMUsers"
-            Effect = "Allow"
-
-            Principal = {
-                AWS = values(var.user_arns) #มาจาก policies/variables.tf
-            }
-
-            Action = var.s3_object_actions
-
-            Resource = "${var.bucket_1_arn}/*"
+      for item in var.s3_object_actions : {
+        Sid = item.sid
+        Effect = item.effect
+        Principal = {
+          AWS = values(var.user_arns) #มาจาก policies/variables.tf
         }
+
+        Action = item.actions
+
+        Resource = "${var.bucket_1_arn}/*"
+      }
     ]
   })
 }

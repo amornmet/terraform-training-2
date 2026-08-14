@@ -25,11 +25,19 @@ variable "user_arns" {
 #ส่งไปที่ policies/main.tf
 variable "s3_object_actions" {
   description = "s3 action allowed by iam policy"
-  type = list(string)
+  type = list(object({
+    sid = string
+    effect = string
+    actions = list(string)
+  }))
 }
 
 #ส่งไปที่ policies/main.tf
 variable "s3_bucket_actions" {
   description = "s3 action"
-  type = list(string)
+  type = list(object({
+    sid = string
+    effect = string
+    actions = list(string)
+  }))
 }

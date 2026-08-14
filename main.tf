@@ -21,5 +21,6 @@ module "policies" {
   user_arns = module.iam.user_arns #ส่งไปที่ policies/variables.tf
 
   s3_object_actions = var.s3_object_actions
+  
   s3_bucket_actions = var.s3_bucket_actions
 }

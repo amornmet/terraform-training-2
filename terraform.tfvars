@@ -17,13 +17,23 @@ buckets = [
 iam_policy_name = "terraform-s3-policy"
 
 #ส่งไปที่ variables.tf
-s3_object_actions = [
-  "s3:GetObject",
-  "s3:PutObject",
-  "s3:DeleteObject"
+#s3_object_actions = [
+#  "s3:GetObject",
+#  "s3:PutObject",
+#  "s3:DeleteObject"
+#]
+
+#ส่งไปที่ variables.tf
+s3_bucket_actions = [{
+  sid = "allowbucketaction"
+  effect = "Allow"
+  actions = [ "s3:ListAllMyBuckets", "s3:GetBucketLocation" ]
+}
+
 ]
 
-s3_bucket_actions = [
-  "s3:ListAllMyBuckets",
-  "s3:GetBucketLocation"
-]
+s3_object_actions = [ {
+  sid = "allowobjectaction"
+  effect = "Allow"
+  actions = [ "s3:GetObject", "s3:PutObject", "s3:DeleteObject" ]
+} ]
