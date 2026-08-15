@@ -46,3 +46,15 @@ terraform.tfvars (bucket_name) -> variables.tf (var.bucket_name) -> s3 (bucket_n
 # modules
 คือ template
 
+# Key = Value(...)
+user_bucket_mapping = {
+  pliw-dev-01 = { 
+    bucket = "pliw-s3-bucket-01"
+    policy = "iam"
+  }
+
+  pliw-dev-02 = {
+    bucket = "pliw-s3-bucket-02"
+    policy = "bucket"
+  }
+}
