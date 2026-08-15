@@ -31,8 +31,6 @@ variable "iam_policy_name" {
   type        = string
 }
 
-
-
 #s3_bucket_actions
 variable "s3_bucket_actions" {
   description = "s3 action"
